@@ -1,0 +1,49 @@
+# Virtual Environment
+venv/
+myvenv/
+env/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables
+.env
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Database files
+*.db
+*.sqlite3
+
+# Test & coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build files
+build/
+dist/
+*.egg-info/
+
+# Uploaded files (if storing locally)
+uploads/
+temp/
+
+# Mypy/Pyright
+.mypy_cache/
+.pyright/
+
+# Jupyter
+.ipynb_checkpoints/

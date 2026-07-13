@@ -1,0 +1,72 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+.page-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.page-glow::before {
+  content: "";
+  position: absolute;
+  inset: -40% -30%;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.18), transparent 40%),
+    radial-gradient(circle at 80% 60%, rgba(16, 185, 129, 0.18), transparent 45%);
+  filter: blur(18px);
+  opacity: 0.9;
+  animation: glowMove 10s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes glowMove {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(2%, -2%, 0) rotate(6deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+.page-glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.35),
+    rgba(255, 255, 255, 0) 40%
+  );
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Smooth inputs (fallback for browsers) */
+.input-soft {
+  transition: box-shadow 180ms ease, border-color 180ms ease, transform 120ms ease;
+}
+
+/* Responsive spacing helper for mobile */
+@media (max-width: 640px) {
+  .mobile-stack {
+    gap: 10px;
+  }
+}
+
+header>#login-button {
+  background-color: #2563eb;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+
