@@ -3,11 +3,14 @@ from sqlalchemy.orm import Session
 
 from fastapi.middleware.cors import CORSMiddleware
 
-from database import get_db
+from database import get_db, engine, Base
 from models import FrontendRole, BackendRole, DatabaseRole
 
 
 app = FastAPI()
+@app.on_event("startup")
+def startup():
+    Base.metadata.create_all(bind=engine)
 
 # Allow the React dev server to call the API
 app.add_middleware(
