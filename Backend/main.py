@@ -52,6 +52,10 @@ def _apply(position: str, model, *,
     db.refresh(application)
     return application
 
+@app.get("/")
+def home():
+    return {"status": "API running"}
+
 
 @app.post("/frontend")
 def apply_frontend(
