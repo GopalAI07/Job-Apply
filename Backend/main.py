@@ -10,7 +10,12 @@ from models import FrontendRole, BackendRole, DatabaseRole
 app = FastAPI()
 @app.on_event("startup")
 def startup():
+    print("DATABASE:", engine.url)
+    print("TABLES:", Base.metadata.tables.keys())
+
     Base.metadata.create_all(bind=engine)
+
+    print("TABLE CREATION COMPLETE")
 
 # Allow the React dev server to call the API
 app.add_middleware(
