@@ -82,7 +82,7 @@ const FormApplication: React.FC<FormApplicationProps> = ({ jobType }) => {
 
     try {
 
-      const API_BASE_URL = "http://127.0.0.1:8000";
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
       const SUBMIT_PATH = `/${jobType}`; // backend: @app.post("/backend"|"/database"|"/frontend")
 
       const payload = new FormData();

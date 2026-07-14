@@ -8,6 +8,7 @@ from models import FrontendRole, BackendRole, DatabaseRole
 
 
 app = FastAPI()
+
 @app.on_event("startup")
 def startup():
     print("DATABASE:", engine.url)

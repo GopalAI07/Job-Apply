@@ -41,7 +41,7 @@ function Login({ onLoginSuccess }: LoginProps) {
       formData.append("username", username.trim());
       formData.append("password", password.trim());
 
-      const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
+      const API_BASE = import.meta.env.VITE_API_BASE_URL || "";
       const res = await fetch(`${API_BASE}/login`, {
         method: "POST",
         body: formData,
