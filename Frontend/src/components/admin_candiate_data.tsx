@@ -14,7 +14,10 @@ type CandidateRow = {
 
 type ApiResponseItem = CandidateRow | Record<string, any>;
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "";
+const API_BASE =
+  import.meta.env.VITE_API_BASE_URL ||
+  import.meta.env.VITE_API_BASE_URL_VERCEL_LOCAL ||
+  "";
 
 function AdminCandidateData({ position }: { position: AdminSection }) {
   const [rows, setRows] = React.useState<ApiResponseItem[]>([]);

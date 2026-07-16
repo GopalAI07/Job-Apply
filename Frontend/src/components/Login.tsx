@@ -41,7 +41,10 @@ function Login({ onLoginSuccess }: LoginProps) {
       formData.append("username", username.trim());
       formData.append("password", password.trim());
 
-      const API_BASE = import.meta.env.VITE_API_BASE_URL || "";
+      const API_BASE =
+        import.meta.env.VITE_API_BASE_URL ||
+        import.meta.env.VITE_API_BASE_URL_VERCEL_LOCAL ||
+        "";
       const res = await fetch(`${API_BASE}/login`, {
         method: "POST",
         body: formData,

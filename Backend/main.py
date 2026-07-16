@@ -25,6 +25,8 @@ app.add_middleware(
         "http://localhost:5173",
         "http://127.0.0.1:5173",
         "https://job-apply-amedd38ur-gopalai07s-projects.vercel.app",
+        "https://job-apply-ten.vercel.app",
+        "https://www.job-apply-ten.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
