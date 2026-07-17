@@ -45,7 +45,7 @@ export default function Header({ onLoginClick , LoginActive}: HeaderProps) {
             </button>
             : 
             <div
-             className="bg-none text-[#1790d4] px-[16px] py-[10px] border-none  font-extrabold text-[16px] sm:text-[28px] sm:px-6 whitespace-nowrap"
+             className="bg-none text-[#1790d4] px-[4px] py-[2px] border-none  font-extrabold text-[16px] sm:text-[28px] sm:px-6 whitespace-nowrap"
             >@Admin</div>
           }
           </div>
