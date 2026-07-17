@@ -40,9 +40,11 @@ Detailed steps are in:
 - `VITE_API_BASE_URL` (your backend base URL)
 - `VITE_API_BASE_URL_VERCEL_LOCAL` (optional alternate)
 
-> Note: This repo does not currently contain actual `.env` files (so Render/host URLs must be filled in by you). 
+> IMPORTANT: `.env` files are NOT committed (ignored by git via `.gitignore`). This repo does not currently contain actual `.env` files (so Render/host URLs must be filled in by you).
 
 ---
+
+
 
 ## Deployed URLs (from code)
 The backend CORS configuration explicitly whitelists these **Vercel** frontend origins:

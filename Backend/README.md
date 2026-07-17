@@ -25,10 +25,11 @@ pip install -r requirements.txt
 ```
 
 ### 3) Configure environment
-Create `Backend/.env`:
+Create `Backend/.env` (NOT committed):
 ```env
 DATABASE_URL=your_sqlalchemy_connection_string
 ```
+
 
 Example (Postgres):
 ```env

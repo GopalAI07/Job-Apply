@@ -1,0 +1,4 @@
+# Root gitignore
+# Intentionally ignore env files if ever created at repo root
+.env
+

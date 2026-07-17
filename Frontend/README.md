@@ -15,11 +15,15 @@ npm i
 ```
 
 ### 2) Configure environment
-Create `Frontend/.env`:
+Create `Frontend/.env` (NOT committed):
 ```env
 VITE_API_BASE_URL=http://localhost:8000
 VITE_API_BASE_URL_VERCEL_LOCAL=http://localhost:8000
 ```
+
+> Ensure `.env` is ignored by git (already in `Frontend/.gitignore`).
+
+
 
 > The code reads one of these:
 - `import.meta.env.VITE_API_BASE_URL`
