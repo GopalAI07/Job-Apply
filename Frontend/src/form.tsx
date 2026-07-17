@@ -139,7 +139,7 @@ const FormApplication: React.FC<FormApplicationProps> = ({ jobType }) => {
           <div className="w-[54px] h-[54px] mx-auto mb-[14px] rounded-[18px] bg-emerald-500/10 text-emerald-700 flex items-center justify-center font-extrabold text-[26px]" aria-hidden>
             ✓
           </div>
-          <h2 className="text-[26px] text-emerald-800 mb-[8px]">Application submitted</h2>
+<h2 className="text-xl sm:text-[26px] md:text-[26px] text-emerald-800 mb-[8px]">Application submitted</h2>
           <p className="text-emerald-800/90 leading-[1.6]">
             Thank you for applying. We’ll review your details and get back to you soon.
           </p>
@@ -156,8 +156,8 @@ const FormApplication: React.FC<FormApplicationProps> = ({ jobType }) => {
   return (
     <>
   
-    <div
-      className="relative min-h-screen flex justify-center items-center px-[30px] py-[30px] bg-[#f5f7fb] overflow-hidden"
+<div
+      className="relative min-h-screen flex justify-center items-center px-3 sm:px-6 lg:px-[30px] py-8 sm:py-10 lg:py-[30px] bg-[#f5f7fb] overflow-hidden"
       style={{
         backgroundImage:
           "radial-gradient(900px 300px at 15% 10%, rgba(37, 99, 235, 0.14), transparent 55%), radial-gradient(700px 250px at 90% 20%, rgba(16, 185, 129, 0.14), transparent 55%)",
@@ -198,21 +198,21 @@ const FormApplication: React.FC<FormApplicationProps> = ({ jobType }) => {
             <div className="inline-flex items-center gap-2 px-[7px] py-[7px] rounded-full bg-blue-600/10 text-blue-700 font-bold text-[13px]">
               Open role
             </div>
-            <h1 className="mt-[14px] text-[32px] tracking-[-0.02em] text-slate-900">
+<h1 className="mt-[14px] text-[28px] sm:text-[32px] tracking-[-0.02em] text-slate-900">
               {jobType === "backend"
                 ? "Backend Developer"
                 : jobType === "database"
                   ? "Database Engineer"
                   : "Frontend Developer"}
             </h1>
-            <p className="mt-[8px] text-[15px] text-slate-500">
+<p className="mt-[8px] text-[14px] sm:text-[15px] text-slate-500">
               A quick application designed for speed and clarity.
             </p>
         </header>
 
-        <div className="bg-white/85 border border-[rgba(148,163,184,0.22)] rounded-[16px] p-[18px]">
+<div className="bg-white/85 border border-[rgba(148,163,184,0.22)] rounded-[16px] p-4 sm:p-[18px]">
           <div className="font-extrabold text-slate-900">Your details</div>
-          <div className="h-[1px] bg-[rgba(148,163,184,0.30)] my-[12px] mb-[16px]" />
+<div className="h-[1px] bg-[rgba(148,163,184,0.30)] my-3 mb-4" />
 
           <form onSubmit={handleSubmit} className="w-full">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-[14px]">
