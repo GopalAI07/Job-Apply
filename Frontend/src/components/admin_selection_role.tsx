@@ -1,6 +1,6 @@
 
 import { type AdminSection } from "./admin_candiate_data";
-
+import "../styles/admin_selection_role.css"
 type AdminAction = AdminSection;
 
 type Props = {
@@ -27,7 +27,7 @@ function Admin_selection_role({ active, onChange }: Props) {
         <button
           type="button"
           onClick={() => onChange("frontend")}
-          className={`${buttonBase} bg-white/80 border-[rgba(148,163,184,0.35)] ${
+          className={`${buttonBase} admin-role-btn frontend-card bg-white/80 border-[rgba(148,163,184,0.35)] ${
             active === "frontend"
               ? "bg-[rgba(37,99,235,0.08)] border-[#2563eb] shadow-[0_10px_30px_rgba(37,99,235,0.12)]"
               : "hover:shadow-[0_14px_40px_rgba(15,23,42,0.10)]"
@@ -42,7 +42,7 @@ function Admin_selection_role({ active, onChange }: Props) {
         <button
           type="button"
           onClick={() => onChange("backend")}
-          className={`${buttonBase} bg-white/80 border-[rgba(148,163,184,0.35)] ${
+          className={`${buttonBase} admin-role-btn backend-card bg-white/80 border-[rgba(148,163,184,0.35)] ${
             active === "backend"
               ? "bg-[rgba(16,185,129,0.08)] border-[#10b981] shadow-[0_10px_30px_rgba(16,185,129,0.12)]"
               : "hover:shadow-[0_14px_40px_rgba(15,23,42,0.10)]"
@@ -57,7 +57,7 @@ function Admin_selection_role({ active, onChange }: Props) {
         <button
           type="button"
           onClick={() => onChange("database")}
-          className={`${buttonBase} bg-white/80 border-[rgba(148,163,184,0.35)] ${
+          className={`${buttonBase} admin-role-btn database-card bg-white/80 border-[rgba(148,163,184,0.35)] ${
             active === "database"
               ? "bg-[rgba(124,58,237,0.08)] border-[#7c3aed] shadow-[0_10px_30px_rgba(124,58,237,0.12)]"
               : "hover:shadow-[0_14px_40px_rgba(15,23,42,0.10)]"

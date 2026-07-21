@@ -1,0 +1,353 @@
+.admin-data-wrapper{
+
+    background:linear-gradient(135deg,#ffffff,#f8fbff);
+    box-shadow:
+        0 12px 35px rgba(15,23,42,.05);
+
+    transition:.35s;
+}
+
+.admin-data-wrapper:hover{
+
+    box-shadow:
+        0 20px 50px rgba(37,99,235,.12);
+
+}
+
+.admin-table{
+
+    border-radius:18px;
+    overflow:hidden;
+    transition:.35s;
+}
+
+.admin-table:hover{
+
+    border-color:#60a5fa;
+
+}
+
+.admin-table-main{
+
+    border-collapse:separate;
+    border-spacing:0;
+}
+
+.admin-table-header{
+
+    background:linear-gradient(
+        90deg,
+        #2563eb,
+        #3b82f6
+    );
+
+    color:white;
+}
+
+.admin-table-header th{
+
+    color:white !important;
+    font-size:20px;
+    letter-spacing:.05em;
+}
+
+.admin-row{
+
+    transition:.3s;
+}
+
+.admin-row:nth-child(even){
+
+    background:#fafcff;
+
+}
+
+.admin-row:hover{
+
+    transform:scale(1.005);
+
+    background:linear-gradient(
+        90deg,
+        rgba(59,130,246,.08),
+        rgba(6,182,212,.04)
+    ) !important;
+
+}
+
+.candidate-name{
+
+    transition:.3s;
+}
+
+.admin-row:hover .candidate-name{
+
+    color:#2563eb;
+
+}
+
+.candidate-phone{
+
+    transition:.3s;
+}
+
+.admin-row:hover .candidate-phone{
+
+    color:#0f172a;
+
+}
+
+.candidate-email{
+
+    transition:.3s;
+}
+
+.admin-row:hover .candidate-email{
+
+    color:#2563eb;
+
+}
+
+.resume-btn{
+
+    position:relative;
+    overflow:hidden;
+
+    transition:.35s;
+
+    background:white;
+}
+
+.resume-btn::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-100%;
+
+    top:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.5),
+        transparent
+    );
+
+}
+
+.resume-btn:hover::before{
+
+    animation:resumeShine .8s;
+
+}
+
+.resume-btn:hover{
+
+    transform:translateY(-2px);
+
+    background:#2563eb !important;
+
+    color:white;
+
+    border-color:#2563eb;
+
+    box-shadow:
+        0 12px 25px rgba(37,99,235,.35);
+
+}
+
+.resume-btn span:first-child{
+
+    transition:.35s;
+
+}
+
+.resume-btn:hover span:first-child{
+
+    transform:rotate(-15deg) scale(1.2);
+
+}
+
+.admin-table td{
+
+    transition:.25s;
+}
+
+.admin-table tbody tr:hover td{
+
+    border-color:#bfdbfe;
+
+}
+
+.loading-pulse{
+
+    animation:pulse 1.4s infinite;
+
+}
+
+@keyframes resumeShine{
+
+    from{
+
+        left:-100%;
+
+    }
+
+    to{
+
+        left:130%;
+
+    }
+
+}
+
+@keyframes pulse{
+
+    0%{
+
+        opacity:.5;
+
+    }
+
+    50%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        opacity:.5;
+
+    }
+
+}
+
+.frontend-table .admin-table-header{
+    background:linear-gradient(90deg,#2563eb,#38bdf8);
+}
+
+.backend-table .admin-table-header{
+    background:linear-gradient(90deg,#059669,#22c55e);
+}
+
+.database-table .admin-table-header{
+    background:linear-gradient(90deg,#7c3aed,#a855f7);
+}
+
+.frontend-table .resume-btn:hover{
+    background:#2563eb !important;
+}
+
+.backend-table .resume-btn:hover{
+    background:#059669 !important;
+}
+
+.database-table .resume-btn:hover{
+    background:#7c3aed !important;
+}
+
+.frontend-table .admin-row:hover{
+    background:rgba(37,99,235,.08) !important;
+}
+
+.backend-table .admin-row:hover{
+    background:rgba(5,150,105,.08) !important;
+}
+
+.database-table .admin-row:hover{
+    background:rgba(124,58,237,.08) !important;
+}
+
+.auth-admin-back-btn{
+
+    position:relative;
+
+    overflow:hidden;
+
+    color:white !important;
+
+    background:linear-gradient(135deg, #4c51ba, #1185f9) !important;
+
+    border:1px solid #cbd5e1 !important;
+
+    transition:all .35s ease;
+
+}
+
+.auth-admin-back-btn::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+    width:70%;
+
+    height:100%;
+
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.7),
+        transparent
+    );
+
+    transform:skewX(-25deg);
+
+}
+
+.auth-admin-back-btn:hover{
+
+    color:#fff !important;
+
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #3b82f6
+    ) !important;
+
+    border-color:#2563eb !important;
+
+    transform:translateY(-3px) scale(1.05);
+
+    box-shadow:
+        0 15px 35px rgba(37,99,235,.35);
+
+}
+
+.auth-admin-back-btn:hover::before{
+
+    animation:backShine .8s linear;
+
+}
+
+.auth-admin-back-btn:active{
+
+    transform:scale(.95);
+
+}
+
+@keyframes backShine{
+
+    from{
+
+        left:-120%;
+
+    }
+
+    to{
+
+        left:150%;
+
+    }
+
+}

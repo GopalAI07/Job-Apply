@@ -1,0 +1,763 @@
+:root {
+  --form-primary: #2563eb;
+  --form-primary-dark: #1d4ed8;
+  --form-primary-light: rgba(37, 99, 235, 0.12);
+  --form-primary-glow: rgba(37, 99, 235, 0.25);
+
+  --form-success: #10b981;
+  --form-success-light: rgba(16, 185, 129, 0.12);
+  --form-success-glow: rgba(16, 185, 129, 0.25);
+
+  --form-warning: #f59e0b;
+  --form-error: #ef4444;
+  --form-error-light: rgba(239, 68, 68, 0.10);
+  --form-error-border: rgba(239, 68, 68, 0.35);
+
+  --form-slate-50: #f8fafc;
+  --form-slate-100: #f1f5f9;
+  --form-slate-200: #e2e8f0;
+  --form-slate-300: #cbd5e1;
+  --form-slate-400: #94a3b8;
+  --form-slate-500: #64748b;
+  --form-slate-600: #475569;
+  --form-slate-700: #334155;
+  --form-slate-800: #1e293b;
+  --form-slate-900: #0f172a;
+
+  --form-card-bg: rgba(255, 255, 255, 0.92);
+  --form-card-border: rgba(148, 163, 184, 0.20);
+  --form-card-shadow: 0 14px 40px rgba(15, 23, 42, 0.10);
+  --form-card-shadow-hover: 0 20px 56px rgba(15, 23, 42, 0.16);
+
+  --form-input-border: rgba(148, 163, 184, 0.50);
+  --form-input-focus-border: rgba(37, 99, 235, 0.70);
+  --form-input-focus-glow: rgba(37, 99, 235, 0.15);
+  --form-input-bg: #ffffff;
+
+  --form-transition-fast: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --form-transition-medium: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --form-transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  --form-transition-bounce: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ============================================================
+   Container — Animated gradient background with floating orbs
+   ============================================================ */
+
+/* Floating gradient orbs animation */
+@keyframes form-orb-float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translate(30px, -20px) scale(1.05);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-10px, 30px) scale(0.95);
+    opacity: 0.5;
+  }
+  75% {
+    transform: translate(20px, 10px) scale(1.02);
+    opacity: 0.7;
+  }
+}
+
+@keyframes form-orb-float-2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.5;
+  }
+  33% {
+    transform: translate(-25px, 15px) scale(1.08);
+    opacity: 0.7;
+  }
+  66% {
+    transform: translate(15px, -25px) scale(0.92);
+    opacity: 0.4;
+  }
+}
+
+/* Subtle background shimmer */
+@keyframes form-bg-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.form-bg-animated {
+  position: relative;
+}
+
+.form-bg-animated::before,
+.form-bg-animated::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform, opacity;
+}
+
+.form-bg-animated::before {
+  width: 320px;
+  height: 320px;
+  top: -80px;
+  left: -80px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 70%);
+  animation: form-orb-float 8s ease-in-out infinite;
+}
+
+.form-bg-animated::after {
+  width: 280px;
+  height: 280px;
+  bottom: -60px;
+  right: -60px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+  animation: form-orb-float-2 10s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+/* ============================================================
+   Form Card — Glass-morphism with enhanced shadow & glow
+   ============================================================ */
+
+.form-card {
+  position: relative;
+  background: var(--form-card-bg);
+  color: var(--form-slate-900);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--form-card-border);
+  box-shadow: var(--form-card-shadow);
+  transition:
+    box-shadow var(--form-transition-medium),
+    transform var(--form-transition-medium);
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.form-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    var(--form-primary) 20%,
+    var(--form-success) 50%,
+    var(--form-primary) 80%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: form-bg-shimmer 6s ease-in-out infinite;
+  z-index: 1;
+  opacity: 0.7;
+  border-radius: 18px 18px 0 0;
+}
+
+.form-card:hover {
+  box-shadow: var(--form-card-shadow-hover);
+  transform: translateY(-1px);
+}
+
+/* Subtle ambient glow ring on the card */
+.form-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 19px;
+  background: linear-gradient(
+    135deg,
+    rgba(37, 99, 235, 0.06),
+    transparent 40%,
+    transparent 60%,
+    rgba(16, 185, 129, 0.06)
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Inner content area styling */
+.form-content-section {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 16px;
+  transition: border-color var(--form-transition-fast), background var(--form-transition-fast);
+}
+
+.form-content-section:hover {
+  border-color: rgba(148, 163, 184, 0.35);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+/* ============================================================
+   Header Styles — Role badge & job title
+   ============================================================ */
+
+/* Animated role badge */
+@keyframes form-badge-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.20);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(37, 99, 235, 0);
+  }
+}
+
+.form-role-badge {
+  animation: form-badge-pulse 2s ease-in-out infinite;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Gradient text for the job title */
+.form-job-title {
+  background: linear-gradient(135deg, var(--form-slate-900) 60%, var(--form-primary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+    text-shadow: 0 0 8px rgba(88, 145, 255, .4), 0 0 18px rgba(120, 180, 255, .2);
+}
+
+/* Subtitle styling */
+.form-subtitle {
+  position: relative;
+  display: inline-block;
+}
+
+.form-subtitle::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--form-primary), transparent);
+  border-radius: 2px;
+  opacity: 0.5;
+}
+
+/* ============================================================
+   Form Fields — Enhanced input/textarea/texta styling
+   ============================================================ */
+
+@keyframes form-input-shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-3px); }
+  20%, 40%, 60%, 80% { transform: translateX(3px); }
+}
+
+.form-field {
+  position: relative;
+}
+
+/* Enhanced input field */
+.form-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--form-input-border);
+  border-radius: 10px;
+  font-size: 15px;
+  background: #ffffff;
+  color: var(--form-slate-900);
+  outline: none;
+  transition:
+    border-color var(--form-transition-fast),
+    box-shadow var(--form-transition-fast),
+    transform var(--form-transition-fast);
+  will-change: transform, border-color, box-shadow;
+}
+
+.form-input:hover {
+  border-color: var(--form-input-focus-border);
+}
+
+.form-input:focus {
+  border-color: var(--form-input-focus-border);
+  box-shadow: 0 0 0 4px var(--form-input-focus-glow);
+  transform: translateY(-1px);
+}
+
+/* Placeholder styling */
+.form-input::placeholder {
+  color: var(--form-slate-400);
+  font-size: 14px;
+  opacity: 0.7;
+  transition: opacity var(--form-transition-fast);
+}
+
+.form-input:focus::placeholder {
+  opacity: 0.4;
+}
+
+/* Textarea specific */
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+/* Error state for inputs */
+.form-input--error {
+  border-color: var(--form-error) !important;
+  box-shadow: 0 0 0 4px var(--form-error-light) !important;
+  animation: form-input-shake 0.5s ease-in-out;
+}
+
+/* ============================================================
+   Validation Error Messages — Slide in with icon
+   ============================================================ */
+
+@keyframes form-error-slide-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.form-error-message {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 6px 10px;
+  color: var(--form-error);
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--form-error-light);
+  border-radius: 8px;
+  border-left: 3px solid var(--form-error);
+  animation: form-error-slide-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.form-error-message::before {
+  content: '⚠';
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   Submit Button — Animated gradient with effects
+   ============================================================ */
+
+@keyframes form-btn-gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes form-btn-ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.form-submit-btn {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--form-primary), var(--form-primary-dark), var(--form-primary));
+  background-size: 200% 200%;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform var(--form-transition-fast),
+    box-shadow var(--form-transition-fast),
+    filter var(--form-transition-fast),
+    opacity var(--form-transition-fast);
+  animation: form-btn-gradient-shift 4s ease-in-out infinite;
+  box-shadow: 
+    0 8px 24px var(--form-primary-glow),
+    0 2px 4px rgba(0, 0, 0, 0.10);
+  letter-spacing: 0.02em;
+  isolation: isolate;
+}
+
+.form-submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 
+    0 12px 32px var(--form-primary-glow),
+    0 4px 8px rgba(0, 0, 0, 0.12);
+  filter: brightness(1.06);
+}
+
+.form-submit-btn:active:not(:disabled) {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: 
+    0 4px 12px var(--form-primary-glow),
+    0 1px 2px rgba(0, 0, 0, 0.08);
+  filter: brightness(0.96);
+}
+
+.form-submit-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+  animation: none;
+  background: linear-gradient(135deg, var(--form-slate-400), var(--form-slate-500));
+  box-shadow: none;
+}
+
+/* Shimmer effect across button */
+.form-submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.20),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.form-submit-btn:hover:not(:disabled)::before {
+  left: 125%;
+}
+
+/* Ripple effect (only on click — added via JS, but CSS handles animation) */
+.form-submit-btn .form-btn-ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(0);
+  animation: form-btn-ripple 0.6s ease-out;
+  pointer-events: none;
+}
+
+/* ============================================================
+   Loading / Submitting State
+   ============================================================ */
+
+@keyframes form-spinner {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.form-submit-btn--loading {
+  pointer-events: none;
+  animation: none;
+  background: linear-gradient(135deg, var(--form-primary-dark), var(--form-primary));
+}
+
+.form-submit-btn--loading .form-btn-text {
+  opacity: 0;
+}
+
+.form-submit-btn--loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
+  border: 3px solid rgba(255, 255, 255, 0.30);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: form-spinner 0.7s linear infinite;
+  z-index: 2;
+}
+
+/* ============================================================
+   Success State — Animated checkmark entrance
+   ============================================================ */
+
+@keyframes form-success-checkmark {
+  0% {
+    transform: scale(0) rotate(-45deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(5deg);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(0.95) rotate(-2deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes form-success-bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.02) translateY(-4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes form-success-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.20);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.40);
+  }
+}
+
+.form-success-container {
+  animation: form-success-bounce-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  color: var(--form-slate-900);
+}
+
+.form-success-checkmark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  background: var(--form-success-light);
+  color: #047857;
+  font-size: 26px;
+  font-weight: 800;
+  animation: form-success-checkmark 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+}
+
+.form-success-card {
+  animation: form-success-bounce-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation-delay: 0.1s;
+  animation-fill-mode: both;
+  animation: form-success-glow 2s ease-in-out infinite;
+  border: 1px solid rgba(16, 185, 129, 0.18);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.form-success-reference {
+  display: inline-block;
+  background: var(--form-success-light);
+  color: #047857;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 13px;
+  animation: form-success-bounce-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation-delay: 0.3s;
+  animation-fill-mode: both;
+}
+
+/* ============================================================
+   Helper text & hints
+   ============================================================ */
+
+.form-hint {
+  color: var(--form-slate-500);
+  font-size: 13px;
+  margin-top: 8px;
+  opacity: 0.85;
+  transition: opacity var(--form-transition-fast);
+}
+
+.form-hint:hover {
+  opacity: 1;
+}
+
+.form-hint code {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  background: var(--form-slate-100);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  border: 1px solid var(--form-slate-200);
+}
+
+/* ============================================================
+   Disclaimers & footer text
+   ============================================================ */
+
+.form-disclaimer {
+  color: var(--form-slate-500);
+  font-size: 12.5px;
+  opacity: 0.8;
+  transition: opacity var(--form-transition-fast);
+}
+
+.form-disclaimer:hover {
+  opacity: 1;
+}
+
+/* ============================================================
+   Section Divider
+   ============================================================ */
+
+.form-section-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(148, 163, 184, 0.35) 20%,
+    rgba(148, 163, 184, 0.35) 80%,
+    transparent 100%
+  );
+  margin: 12px 0 16px;
+}
+
+/* ============================================================
+   Responsive Fine-tuning
+   ============================================================ */
+
+@media (max-width: 640px) {
+  .form-card {
+    border-radius: 16px;
+    padding: 24px 18px !important;
+  }
+
+  .form-card::before {
+    border-radius: 16px 16px 0 0;
+  }
+
+  .form-input {
+    padding: 11px 12px;
+    font-size: 14px;
+  }
+
+  .form-submit-btn {
+    padding: 13px 20px;
+    font-size: 15px;
+  }
+
+  .form-success-checkmark {
+    width: 48px;
+    height: 48px;
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .form-card {
+    padding: 30px !important;
+  }
+}
+
+/* ============================================================
+   Utility: Focus-visible for keyboard navigation
+   ============================================================ */
+
+.form-input:focus-visible {
+  outline: 2px solid var(--form-primary);
+  outline-offset: 2px;
+}
+
+.form-submit-btn:focus-visible {
+  outline: 2px solid var(--form-primary);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   Reduced motion preferences
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .form-bg-animated::before,
+  .form-bg-animated::after {
+    animation: none;
+  }
+
+  .form-card::before {
+    animation: none;
+    background: linear-gradient(90deg, var(--form-primary), var(--form-success));
+  }
+
+  .form-submit-btn {
+    animation: none;
+    background: linear-gradient(135deg, var(--form-primary), var(--form-primary-dark));
+  }
+
+  .form-error-message {
+    animation: none;
+  }
+
+  .form-success-checkmark,
+  .form-success-card,
+  .form-success-reference {
+    animation: none;
+  }
+
+  .form-role-badge {
+    animation: none;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.20);
+  }
+
+  .form-input--error {
+    animation: none;
+  }
+
+  .form-submit-btn::before {
+    display: none;
+  }
+}
+
+.form-header-css{
+     background:
+    radial-gradient(circle at top left,
+        rgba(40,215,205,.18),
+        transparent 35%),
+    radial-gradient(circle at bottom right,
+        rgba(84,108,255,.25),
+        transparent 45%),
+    linear-gradient(
+        135deg,
+        #0d1532 0%,
+        #193c8f 50%,
+        #4978ff 100%
+    );
+
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:18px;
+    color:white;
+    padding:30px;
+    overflow:hidden;
+
+    box-shadow:
+        0 12px 30px rgba(23,39,96,.35),
+        inset 0 1px 1px rgba(255,255,255,.08);
+}

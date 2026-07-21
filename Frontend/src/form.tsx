@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
-
+import "./styles/form.css";
 
 
 interface FormData {
@@ -86,7 +86,7 @@ const FormApplication: React.FC<FormApplicationProps> = ({ jobType }) => {
         import.meta.env.VITE_API_BASE_URL ||
         import.meta.env.VITE_API_BASE_URL_VERCEL_LOCAL ||
         "";
-      const SUBMIT_PATH = `/${jobType}`; // backend: @app.post("/backend"|"/database"|"/frontend")
+      const SUBMIT_PATH = `/${jobType}`;
 
       const payload = new FormData();
       payload.append("jobType", jobType);
@@ -102,19 +102,14 @@ const FormApplication: React.FC<FormApplicationProps> = ({ jobType }) => {
         body: payload,
       });
 
-      // Treat 2xx as success. If backend returns 500/validation error,
-      // we surface the response body.
       if (!res.ok) {
         const text = await res.text().catch(() => "");
         throw new Error(text || `Request failed with status ${res.status}`);
       }
 
-      // Force read response (helps surface unexpected HTML/proxy errors)
-      // and ensures the fetch promise fully completes.
       try {
         await res.json();
       } catch {
-        // ignore if backend doesn't return JSON
       }
 
       setSubmitted(true);
@@ -128,22 +123,22 @@ const FormApplication: React.FC<FormApplicationProps> = ({ jobType }) => {
   if (submitted) {
     return (
       <div
-        className="min-h-fit flex justify-center items-center px-[30px] py-[30px]"
+        className="form-success-container min-h-fit flex justify-center items-center px-[30px] py-[30px]"
         style={{
           backgroundImage:
             "radial-gradient(700px 260px at 30% 20%, rgba(16, 185, 129, 0.18), transparent 60%)",
           backgroundColor: "#ecfdf5",
         }}
       >
-        <div className="w-full max-w-[620px] bg-white/90 rounded-[18px] p-[28px] border border-[rgba(16,185,129,0.22)] shadow-[0_14px_40px_rgba(15,23,42,0.08)] text-center">
-          <div className="w-[54px] h-[54px] mx-auto mb-[14px] rounded-[18px] bg-emerald-500/10 text-emerald-700 flex items-center justify-center font-extrabold text-[26px]" aria-hidden>
+        <div className="form-success-card w-full max-w-[620px] bg-white/90 rounded-[18px] p-[28px] border border-[rgba(16,185,129,0.22)] shadow-[0_14px_40px_rgba(15,23,42,0.08)] text-center">
+          <div className="form-success-checkmark w-[54px] h-[54px] mx-auto mb-[14px] rounded-[18px] bg-emerald-500/10 text-emerald-700 flex items-center justify-center font-extrabold text-[26px]" aria-hidden>
             ✓
           </div>
           <h2 className="text-xl sm:text-[26px] md:text-[26px] text-emerald-800 mb-[8px]">Application submitted</h2>
           <p className="text-emerald-800/90 leading-[1.6]">
             Thank you for applying. We’ll review your details and get back to you soon.
           </p>
-          <div className="mt-[16px] inline-block bg-emerald-500/10 text-emerald-700 px-[12px] py-[8px] rounded-full font-bold text-[13px]">
+          <div className="form-success-reference mt-[16px] inline-block bg-emerald-500/10 text-emerald-700 px-[12px] py-[8px] rounded-full font-bold text-[13px]">
             Reference: {cryptoRandomId()}
           </div>
         </div>
@@ -157,7 +152,7 @@ const FormApplication: React.FC<FormApplicationProps> = ({ jobType }) => {
     <>
 
       <div
-        className="relative min-h-screen flex justify-center items-center px-3 sm:px-6 lg:px-[30px] py-8 sm:py-10 lg:py-[30px] bg-[#f5f7fb] overflow-hidden"
+        className="form-bg-animated relative min-h-screen flex justify-center items-center px-3 sm:px-6 lg:px-[30px] py-8 sm:py-10 lg:py-[30px] bg-[#f5f7fb] overflow-hidden"
         style={{
           backgroundImage:
             "radial-gradient(900px 300px at 15% 10%, rgba(37, 99, 235, 0.14), transparent 55%), radial-gradient(700px 250px at 90% 20%, rgba(16, 185, 129, 0.14), transparent 55%)",
@@ -177,7 +172,7 @@ const FormApplication: React.FC<FormApplicationProps> = ({ jobType }) => {
         />
 
         <div
-          className="w-full max-w-[820px] page-glow bg-white/92 p-[34px] rounded-[18px] shadow-[0_14px_40px_rgba(15,23,42,0.10),0_1px_0_rgba(2,6,23,0.06)] border border-[rgba(148,163,184,0.22)] backdrop-blur"
+          className="form-card w-full max-w-[820px] page-glow bg-white/92 p-[34px] rounded-[18px] shadow-[0_14px_40px_rgba(15,23,42,0.10),0_1px_0_rgba(2,6,23,0.06)] border border-[rgba(148,163,184,0.22)] backdrop-blur"
           role="region"
           aria-label="Job application form"
         >
@@ -194,25 +189,25 @@ const FormApplication: React.FC<FormApplicationProps> = ({ jobType }) => {
             className="pointer-events-none absolute inset-0 bg-[radial-gradient(transparent_60%,rgba(15,23,42,0.03)_100%)]"
           />
 
-          <header className="mb-[18px]">
-            <div className="inline-flex items-center gap-2 px-[7px] py-[7px] rounded-full bg-blue-600/10 text-blue-700 font-bold text-[13px]">
+          <header className="mb-[18px] form-header-css">
+            <div className="form-role-badge inline-flex items-center gap-2 px-[7px] py-[7px] rounded-full bg-blue-600/10 text-blue-700 font-bold text-[13px]">
               Open role
             </div>
-            <h1 className="mt-[14px] text-[28px] sm:text-[32px] tracking-[-0.02em] text-slate-900">
+            <h1 className="form-job-title mt-[14px] text-[28px] sm:text-[32px] tracking-[-0.02em] text-slate-900">
               {jobType === "backend"
                 ? "Backend Developer"
                 : jobType === "database"
                   ? "Database Engineer"
                   : "Frontend Developer"}
             </h1>
-            <p className="mt-[8px] text-[14px] sm:text-[15px] text-slate-500">
+            <p className="form-subtitle mt-[8px] text-[14px] sm:text-[15px] text-slate-500">
               A quick application designed for speed and clarity.
             </p>
           </header>
 
-          <div className="bg-white/85 px-[14px] py-[8px] border-none sm:border sm:border-[rgba(148,163,184,0.22)] sm:rounded-[16px]  sm:p-[18px]">
+          <div className="form-content-section bg-white/85 px-[14px] py-[8px] border-none sm:border sm:border-[rgba(148,163,184,0.22)] sm:rounded-[16px]  sm:p-[18px]">
             <div className="font-extrabold text-slate-900">Your details</div>
-            <div className="h-[1px] bg-[rgba(148,163,184,0.30)] my-3 mb-4" />
+            <div className="form-section-divider h-[1px] bg-[rgba(148,163,184,0.30)] my-3 mb-4" />
 
             <form onSubmit={handleSubmit} className="w-full">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-[14px]">
@@ -231,10 +226,10 @@ const FormApplication: React.FC<FormApplicationProps> = ({ jobType }) => {
                     onChange={handleChange}
                     placeholder=""
                     aria-invalid={!!showError("fullName")}
-                    className="w-full p-[12px] rounded-[10px] border border-[rgba(148,163,184,0.55)] text-[15px] bg-white outline-none transition-[box-shadow,border-color,transform] focus:border-[rgba(37,99,235,0.75)] focus:shadow-[0_0_0_4px_rgba(37,99,235,0.16)]"
+                    className="form-input w-full p-[12px] rounded-[10px] border border-[rgba(148,163,184,0.55)] text-[15px] bg-white outline-none transition-[box-shadow,border-color,transform] focus:border-[rgba(37,99,235,0.75)] focus:shadow-[0_0_0_4px_rgba(37,99,235,0.16)]"
                   />
                   {showError("fullName") && (
-                    <div className="mt-[8px] text-red-600 text-[13px] font-semibold">
+                    <div className="form-error-message mt-[8px] text-red-600 text-[13px] font-semibold">
                       {validation.fullName}
                     </div>
                   )}
@@ -256,10 +251,10 @@ const FormApplication: React.FC<FormApplicationProps> = ({ jobType }) => {
                     onChange={handleChange}
                     placeholder=""
                     aria-invalid={!!showError("email")}
-                    className="w-full p-[12px] rounded-[10px] border border-[rgba(148,163,184,0.55)] text-[15px] bg-white outline-none transition-[box-shadow,border-color,transform] focus:border-[rgba(37,99,235,0.75)] focus:shadow-[0_0_0_4px_rgba(37,99,235,0.16)]"
+                    className="form-input w-full p-[12px] rounded-[10px] border border-[rgba(148,163,184,0.55)] text-[15px] bg-white outline-none transition-[box-shadow,border-color,transform] focus:border-[rgba(37,99,235,0.75)] focus:shadow-[0_0_0_4px_rgba(37,99,235,0.16)]"
                   />
                   {showError("email") && (
-                    <div className="mt-[8px] text-red-600 text-[13px] font-semibold">
+                    <div className="form-error-message mt-[8px] text-red-600 text-[13px] font-semibold">
                       {validation.email}
                     </div>
                   )}
@@ -280,10 +275,10 @@ const FormApplication: React.FC<FormApplicationProps> = ({ jobType }) => {
                     onChange={handleChange}
                     placeholder=""
                     aria-invalid={!!showError("phone")}
-                    className="w-full p-[12px] rounded-[10px] border border-[rgba(148,163,184,0.55)] text-[15px] bg-white outline-none transition-[box-shadow,border-color,transform] focus:border-[rgba(37,99,235,0.75)] focus:shadow-[0_0_0_4px_rgba(37,99,235,0.16)]"
+                    className="form-input w-full p-[12px] rounded-[10px] border border-[rgba(148,163,184,0.55)] text-[15px] bg-white outline-none transition-[box-shadow,border-color,transform] focus:border-[rgba(37,99,235,0.75)] focus:shadow-[0_0_0_4px_rgba(37,99,235,0.16)]"
                   />
                   {showError("phone") && (
-                    <div className="mt-[8px] text-red-600 text-[13px] font-semibold">
+                    <div className="form-error-message mt-[8px] text-red-600 text-[13px] font-semibold">
                       {validation.phone}
                     </div>
                   )}
@@ -306,16 +301,16 @@ const FormApplication: React.FC<FormApplicationProps> = ({ jobType }) => {
                   onChange={handleChange}
                   placeholder="Paste a shareable Google Drive link (e.g., https://drive.google.com/file/d/<id>/view)"
                   aria-invalid={!!showError("resumeGoogleDriveLink")}
-                  className="w-full p-[12px] rounded-[10px] border border-[rgba(148,163,184,0.55)] text-[15px] bg-white outline-none transition-[box-shadow,border-color,transform] focus:border-[rgba(37,99,235,0.75)] focus:shadow-[0_0_0_4px_rgba(37,99,235,0.16)]"
+                  className="form-input w-full p-[12px] rounded-[10px] border border-[rgba(148,163,184,0.55)] text-[15px] bg-white outline-none transition-[box-shadow,border-color,transform] focus:border-[rgba(37,99,235,0.75)] focus:shadow-[0_0_0_4px_rgba(37,99,235,0.16)]"
                 />
 
                 {showError("resumeGoogleDriveLink") && (
-                  <div className="mt-[8px] text-red-600 text-[13px] font-semibold">
+                  <div className="form-error-message mt-[8px] text-red-600 text-[13px] font-semibold">
                     {validation.resumeGoogleDriveLink}
                   </div>
                 )}
 
-                <div className="mt-[8px] text-slate-500 text-[13px]">
+                <div className="form-hint mt-[8px] text-slate-500 text-[13px]">
                   Must be a Google Drive <b>file</b> link (shareable). Example:{" "}
                   <span className="font-mono">https://drive.google.com/file/d/[fileId]/view</span>
                 </div>
@@ -337,20 +332,20 @@ const FormApplication: React.FC<FormApplicationProps> = ({ jobType }) => {
                   onChange={handleChange}
                   placeholder="Tell us why you're a great fit..."
                   aria-invalid={!!showError("coverLetter")}
-                  className="w-full p-[12px] rounded-[10px] border border-[rgba(148,163,184,0.55)] text-[15px] bg-white outline-none transition-[box-shadow,border-color,transform] focus:border-[rgba(37,99,235,0.75)] focus:shadow-[0_0_0_4px_rgba(37,99,235,0.16)] resize-y min-h-[120px]"
+                  className="form-input form-textarea w-full p-[12px] rounded-[10px] border border-[rgba(148,163,184,0.55)] text-[15px] bg-white outline-none transition-[box-shadow,border-color,transform] focus:border-[rgba(37,99,235,0.75)] focus:shadow-[0_0_0_4px_rgba(37,99,235,0.16)] resize-y min-h-[120px]"
                 />
                 {showError("coverLetter") && (
-                  <div className="mt-[8px] text-red-600 text-[13px] font-semibold">
+                  <div className="form-error-message mt-[8px] text-red-600 text-[13px] font-semibold">
                     {validation.coverLetter}
                   </div>
                 )}
-                <div className="mt-[8px] text-slate-500 text-[13px]">
+                <div className="form-hint mt-[8px] text-slate-500 text-[13px]">
                   Tip: Keep it concise (about 6–10 lines).
                 </div>
               </div>
 
               {submitError && (
-                <div className="mb-[12px] text-red-700 bg-red-500/10 border border-red-500/30 px-[12px] py-[10px] rounded-[12px] text-[13.5px] font-semibold">
+                <div className="form-error-message mb-[12px] text-red-700 bg-red-500/10 border border-red-500/30 px-[12px] py-[10px] rounded-[12px] text-[13.5px] font-semibold">
                   {submitError}
                 </div>
               )}
@@ -358,12 +353,12 @@ const FormApplication: React.FC<FormApplicationProps> = ({ jobType }) => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w p-[14px] rounded-[12px] bg-gradient-to-r from-[#2563eb] to-[#1d4ed8] text-white text-[16px] font-extrabold cursor-pointer transition-[transform,filter,opacity] hover:filter brightness(1.03) active:translate-y-[1px] disabled:cursor-not-allowed disabled:opacity-70 border-none"
+                className={`form-submit-btn ${isSubmitting ? 'form-submit-btn--loading' : ''} w p-[14px] rounded-[12px] bg-gradient-to-r from-[#2563eb] to-[#1d4ed8] text-white text-[16px] font-extrabold cursor-pointer transition-[transform,filter,opacity] hover:filter brightness(1.03) active:translate-y-[1px] disabled:cursor-not-allowed disabled:opacity-70 border-none`}
               >
-                {isSubmitting ? "Submitting..." : "Apply Now"}
+                <span className="form-btn-text">{isSubmitting ? "Submitting..." : "Apply Now"}</span>
               </button>
 
-              <div className="mt-[12px] text-slate-500 text-[12.5px]">
+              <div className="form-disclaimer mt-[12px] text-slate-500 text-[12.5px]">
                 By submitting, you confirm the information provided is accurate.
               </div>
             </form>
@@ -379,10 +374,7 @@ function verifyGoogleDriveResumeLink(link: string): string | null {
   if (!value) return "Please provide your resume Google Drive link.";
   if (value.length > 1200) return "Resume link looks too long.";
 
-  // Common Drive file patterns:
-  // 1) https://drive.google.com/file/d/<id>/view
-  // 2) https://drive.google.com/open?id=<id>
-  // 3) https://drive.google.com/uc?id=<id>&export=download
+  // Common Drive file patterns
   const patterns: RegExp[] = [
     /drive\.google\.com\/file\/d\/([^/\s?#]+)/i,
     /drive\.google\.com\/open\?id=([^&\s]+)/i,
@@ -421,9 +413,3 @@ function cryptoRandomId() {
 }
 
 export default FormApplication;
-
-
-
-
-
-

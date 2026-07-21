@@ -1,5 +1,5 @@
 import React from "react";
-
+import "../styles/admin_candidate_data.css"
 export type AdminSection = "frontend" | "backend" | "database";
 
 type CandidateRow = {
@@ -72,8 +72,6 @@ function AdminCandidateData({ position }: { position: AdminSection }) {
 
   const buildResumeHref = (applicationId: string | number | undefined) => {
     if (!applicationId) return null;
-    // Backend returns JSON with { resume_google_drive_link }.
-    // We'll open it in a new tab by rendering JSON into a temporary page.
     return `${API_BASE}/admin/view/${position}/${applicationId}/`;
   };
 
@@ -101,21 +99,21 @@ function AdminCandidateData({ position }: { position: AdminSection }) {
 
 
   return (
-    <div className="mt-[14px] bg-blue-50/40 p-[18px] rounded-[18px] border border-[rgba(148,163,184,0.22)]">
+    <div className={`mt-[14px] bg-blue-50/40 p-[5px] rounded-[18px] border border-[rgba(148,163,184,0.22)] .admin-data-wrapper ${position}-table`}>
       {loading && <p className="text-[#64748b] text-[14.5px]">Loading…</p>}
       {error && <p className="text-red-600 text-[14.5px]">{error}</p>}
 
       {!loading && !error && (
-        <div className="w-full overflow-x-auto p-[2px] border border-[rgba(148,163,184,0.22)] bg-white/60 backdrop-blur">
+        <div className="w-full overflow-x-auto p-[2px] border border-[rgba(148,163,184,0.22)] bg-white/60 backdrop-blur ">
           <div className="min-w-[760px]">
-            <table className="w-full text-left">
-              <thead>
-                <tr className="text-[14px] font-extrabold tracking-[0.02em] text-[#334155]">
-                  <th className="py-4 px-4 border-b border-[rgba(148,163,184,0.35)]">Candidate</th>
-                  <th className="py-4 px-4 border-b border-[rgba(148,163,184,0.35)]">Phone</th>
-                  <th className="py-4 px-4 border-b border-[rgba(148,163,184,0.35)]">Email</th>
-                  <th className="py-4 px-4 border-b border-[rgba(148,163,184,0.35)]">Cover Letter</th>
-                  <th className="py-4 px-4 border-b border-[rgba(148,163,184,0.35)]">Resume</th>
+            <table className="w-full text-left admin-table">
+              <thead className="admin-table-header ">
+                <tr className="text-[14px] font-extrabold tracking-[0.02em] text-[#334155] ">
+                  <th className="py-4 px-4 border-b border-[rgba(148,163,184,0.35)]  text-center">Candidate</th>
+                  <th className="py-4 px-4 border-b border-[rgba(148,163,184,0.35)]  text-center">Phone</th>
+                  <th className="py-4 px-4 border-b border-[rgba(148,163,184,0.35)]  text-center">Email</th>
+                  <th className="py-4 px-4 border-b border-[rgba(148,163,184,0.35)]  text-center">Cover Letter</th>
+                  <th className="py-4 px-4 border-b border-[rgba(148,163,184,0.35)]  text-center">Resume</th>
                 </tr>
               </thead>
 
@@ -142,30 +140,30 @@ function AdminCandidateData({ position }: { position: AdminSection }) {
                     return (
                       <tr
                         key={String(anyRow?.id ?? idx)}
-                        className="hover:bg-[rgba(37,99,235,0.03)] transition-colors"
+                        className="hover:bg-[rgba(37,99,235,0.03)] transition-colors admin-row"
                       >
-                        <td className="py-3 px-4 border-b border-[rgba(148,163,184,0.18)] text-[14px]">
-                          <div className="font-extrabold text-slate-800">
+                        <td className="py-3 px-4 border-b border-[rgba(148,163,184,0.18)] text-[18px]">
+                          <div className="font-extrabold text-slate-800 candidate-name text-center">
                             {name || "—"}
                           </div>
                         </td>
 
-                        <td className="py-3 px-4 border-b border-[rgba(148,163,184,0.18)] text-[14px]">
-                          <div className="text-[#64748b] text-[12.5px]">
+                        <td className="py-3 px-4 border-b border-[rgba(148,163,184,0.18)] text-[18px]">
+                          <div className="text-[#64748b] text-[12.5px] candidate-phone text-center">
                             {get(row, "phone") ?? "—"}
                           </div>
                         </td>
 
-                        <td className="py-3 px-4 border-b border-[rgba(148,163,184,0.18)] text-[14px]">
-                          <div className="text-[#0f172a] font-medium">
+                        <td className="py-3 px-4 border-b border-[rgba(148,163,184,0.18)] text-[18px]">
+                          <div className="text-[#0f172a] font-medium candidate-email text-center">
                             {get(row, "email") ?? "—"}
                           </div>
                         </td>
 
-                        <td className="py-3 px-4 border-b border-[rgba(148,163,184,0.18)] text-[14px]">
+                        <td className="py-3 px-4 border-b border-[rgba(148,163,184,0.18)] text-[18px]">
                           {coverLetter ? (
                             <span
-                              className="inline-block max-w-[260px] truncate"
+                              className="inline-block max-w-[260px] text-center truncate"
                               title={coverLetter}
                             >
                               {coverLetter}
@@ -180,12 +178,12 @@ function AdminCandidateData({ position }: { position: AdminSection }) {
                             <button
                               type="button"
                               onClick={() => onViewResume(anyRow?.id ?? idx)}
-                              className="flex  justify-between items-center gap-2 p-[6px] rounded-[12px] border border-[rgba(148,163,184,0.35)] bg-white/70 hover:bg-white transition-colors cursor-pointer"
+                              className="flex  justify-between text-center items-center  gap-2 p-[6px] rounded-[12px] border border-[rgba(148,163,184,0.35)] bg-white/70 hover:bg-white transition-colors cursor-pointer resume-btn"
                               title="Open resume on Google Drive"
                             >
                               <span className="text-[18px]">📄</span>
                               <span className="font-extrabold ">View</span>
-                            </button>
+                            </button> 
                           ) : (
                             "—"
                           )}
@@ -204,4 +202,3 @@ function AdminCandidateData({ position }: { position: AdminSection }) {
 }
 
 export default AdminCandidateData;
-

@@ -1,4 +1,6 @@
 import type { MouseEventHandler } from "react";
+import "../styles/header.css";
+
 
 
 type HeaderProps = {
@@ -20,7 +22,6 @@ export default function Header({ onLoginClick , LoginActive}: HeaderProps) {
     >
       <div className="mx-auto max-w-[1120px]">
         <div className="flex flex-col gap-[18px] sm:gap-[22px]">
-          {/* One-line header for mobile/tablet/laptop: E&F + EsterInFotech + Login */}
           <div className="flex items-center justify-between gap-[12px]">
             <div className="flex items-center gap-[12px] min-w-0">
               <div className="w-[44px] h-[44px] rounded-[16px] bg-gradient-to-br from-[#2563eb]/20 to-[#10b981]/20 shadow-[0_10px_28px_rgba(15,23,42,0.10)] flex items-center justify-center shrink-0" aria-hidden>
@@ -33,24 +34,24 @@ export default function Header({ onLoginClick , LoginActive}: HeaderProps) {
                 </span>
               </h1>
             </div>
-          {LoginActive == true ?
+
+            {LoginActive == true ?
             <button
               type="button"
               onClick={onLoginClick}
-              className="bg-[#2563eb] text-white px-[16px] py-[10px] border-none rounded-[10px] cursor-pointer transition-[transform,filter,background-color] hover:bg-[#1d4ed8] active:translate-y-[1px] font-extrabold text-[14px] whitespace-nowrap"
+              className="header-login-btn px-[18px] py-[10px] md:text-[32px] rounded-[12px] cursor-pointer transition-[transform,filter,opacity] active:translate-y-[1px] font-extrabold text-[14px] whitespace-nowrap"
               aria-label="Login"
               id="login-button"
             >
               Login
             </button>
             : 
-            <div
-             className="bg-none text-[#1790d4] px-[4px] py-[2px] border-none  font-extrabold text-[16px] sm:text-[28px] sm:px-6 whitespace-nowrap"
+<div
+             className="header-admin-back-btn px-[14px] py-[6px] rounded-[12px] border-none font-extrabold text-[16px] sm:text-[20px] whitespace-nowrap"
             >@Admin</div>
           }
           </div>
 
-          {/* Badge row on next line (below title) */}
           <div className="flex items-center">
             <div className="inline-flex items-center gap-[8px] px-[10px] py-[6px] rounded-full bg-white/70 backdrop-blur border border-[rgba(148,163,184,0.10)] w-fit">
               <span className="text-[white] font-extrabold text-[12.5px] tracking-[0.02em]">
@@ -63,7 +64,6 @@ export default function Header({ onLoginClick , LoginActive}: HeaderProps) {
             </div>
           </div>
 
-          {/* creative engineering line on next line */}
           <p className="text-[15px] sm:text-[16px] leading-[1.6] text-[#cbd5e1] max-w-[720px]">
             Creative engineering that turns ideas into working products—faster than the
             average build, cleaner than the average code.
@@ -75,6 +75,7 @@ export default function Header({ onLoginClick , LoginActive}: HeaderProps) {
 
   );
 }
+
 
 
 

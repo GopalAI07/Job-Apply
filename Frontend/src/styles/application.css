@@ -1,0 +1,117 @@
+:root {
+  /* ---- Frontend (blue) ---- */
+  --apply-frontend-bg-1: #2563eb;
+  --apply-frontend-bg-2: #1d4ed8;
+  --apply-frontend-shadow: rgba(37, 99, 235, 0.4);
+  --apply-frontend-shadow-hover: rgba(37, 99, 235, 0.55);
+
+  /* ---- Backend (green) ---- */
+  --apply-backend-bg-1: #16a34a;
+  --apply-backend-bg-2: #15803d;
+  --apply-backend-shadow: rgba(22, 163, 74, 0.4);
+  --apply-backend-shadow-hover: rgba(22, 163, 74, 0.55);
+
+  /* ---- Database (purple) ---- */
+  --apply-database-bg-1: #7c3aed;
+  --apply-database-bg-2: #6d28d9;
+  --apply-database-shadow: rgba(124, 58, 237, 0.4);
+  --apply-database-shadow-hover: rgba(124, 58, 237, 0.55);
+}
+
+.apply-btn {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  font-weight: 800;
+  border: none;
+  border-radius: 12px;
+padding: 12px;
+  color: #fff;
+  font-size: 15px;
+
+  /* Smooth transitions */
+  transition:
+    transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 180ms ease,
+    filter 180ms ease;
+
+  /* Subtle resting shadow */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.apply-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(1.08);
+}
+
+.apply-btn:active {
+  transform: translateY(1px) scale(0.98);
+  filter: brightness(0.95);
+}
+
+/* ---------- Shimmer animation on hover ---------- */
+.apply-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.apply-btn:hover::before {
+  left: 125%;
+}
+
+/* ---------- Per-role gradients & shadows ---------- */
+
+/* Frontend — Blue */
+.apply-btn--frontend {
+  background: linear-gradient(135deg, var(--apply-frontend-bg-1), var(--apply-frontend-bg-2));
+  box-shadow: 0 8px 24px var(--apply-frontend-shadow);
+}
+
+.apply-btn--frontend:hover {
+  box-shadow: 0 12px 36px var(--apply-frontend-shadow-hover);
+}
+
+.apply-btn--frontend:active {
+  box-shadow: 0 2px 8px var(--apply-frontend-shadow);
+}
+
+/* Backend — Green */
+.apply-btn--backend {
+  background: linear-gradient(135deg, var(--apply-backend-bg-1), var(--apply-backend-bg-2));
+  box-shadow: 0 8px 24px var(--apply-backend-shadow);
+}
+
+.apply-btn--backend:hover {
+  box-shadow: 0 12px 36px var(--apply-backend-shadow-hover);
+}
+
+.apply-btn--backend:active {
+  box-shadow: 0 2px 8px var(--apply-backend-shadow);
+}
+
+/* Database — Purple */
+.apply-btn--database {
+  background: linear-gradient(135deg, var(--apply-database-bg-1), var(--apply-database-bg-2));
+  box-shadow: 0 8px 24px var(--apply-database-shadow);
+}
+
+.apply-btn--database:hover {
+  box-shadow: 0 12px 36px var(--apply-database-shadow-hover);
+}
+
+.apply-btn--database:active {
+  box-shadow: 0 2px 8px var(--apply-database-shadow);
+}

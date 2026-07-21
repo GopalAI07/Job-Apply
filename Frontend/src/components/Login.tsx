@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-
+import "../styles/auth.css";
 type LoginProps = {
   onLoginSuccess?: (username: string) => void;
 };
@@ -55,10 +55,8 @@ function Login({ onLoginSuccess }: LoginProps) {
 
       let data: any = null;
       try {
-        // Prefer JSON responses (FastAPI default)
         data = await res.json();
       } catch {
-        // Fallback to text if backend returns non-JSON
         const raw = await res.text();
         data = raw ? { message: raw } : null;
       }
@@ -176,7 +174,7 @@ function Login({ onLoginSuccess }: LoginProps) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full p-[13px] rounded-[12px] bg-gradient-to-r from-[#2563eb] to-[#1d4ed8] text-white text-[15.5px] font-extrabold cursor-pointer transition-[filter,transform] hover:filter brightness(1.05) active:translate-y-[1px] disabled:cursor-not-allowed disabled:opacity-70 border-none"
+            className="auth-login-btn w-full p-[13px] rounded-[12px] text-[15.5px] font-extrabold cursor-pointer transition-[filter,transform] hover:filter brightness(1.05) active:translate-y-[1px] disabled:cursor-not-allowed disabled:opacity-70 border-none"
           >
             {isSubmitting ? "Signing in..." : "Login"}
           </button>

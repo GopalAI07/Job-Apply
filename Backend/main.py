@@ -18,7 +18,6 @@ def startup():
 
     print("TABLE CREATION COMPLETE")
 
-# Allow the React dev server to call the API
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -44,7 +43,6 @@ def _apply(position: str, model, *,
            db: Session):
     resume_google_drive_link = (resume_google_drive_link or "").strip()
     if not resume_google_drive_link:
-        # FastAPI will surface this as 422/500 depending on handler; explicit HTTPException is clearer.
         raise HTTPException(status_code=400, detail="resume_google_drive_link is required")
 
     application = model(
